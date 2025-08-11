@@ -3,7 +3,6 @@
  */
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Plus, Trash2, GripVertical, Upload, Eye, Save, Settings, ChevronDown, X, Folders, SquarePen, BookText } from 'lucide-react';
 import FormHeader from './components/FormHeader.jsx';
 import QuestionCard from './components/QuestionCard.jsx';
 import CategorizeBuilder from './components/builder/CategorizeBuilder.jsx';
@@ -38,23 +37,19 @@ const FormBuilder = () => {
     try {
       const response = await fetch(`${backendUrl}/forms`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           title: form.title,
           headerImage: form.headerImage,
           questions: form.questions.map(q => ({
             type: q.type,
             questionText: q.title,
-            data: q // Sending the entire question object as data
+            data: q
           }))
         }),
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to save the form');
-      }
+      if (!response.ok) throw new Error('Failed to save the form');
 
       const data = await response.json();
       setFormId(data.formId);
@@ -75,9 +70,7 @@ const FormBuilder = () => {
     try {
       const response = await fetch(`${backendUrl}/forms/${formId}/submit`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           formId: formId,
           answers: Object.entries(responses).map(([questionId, answer]) => ({
@@ -87,9 +80,7 @@ const FormBuilder = () => {
         }),
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to submit responses');
-      }
+      if (!response.ok) throw new Error('Failed to submit responses');
 
       alert('Responses submitted successfully!');
       console.log('Responses submitted:', responses);
@@ -107,11 +98,7 @@ const FormBuilder = () => {
       title: `Question ${form.questions.length + 1}`,
       ...getDefaultQuestionData(type)
     };
-
-    setForm(prev => ({
-      ...prev,
-      questions: [...prev.questions, newQuestion]
-    }));
+    setForm(prev => ({ ...prev, questions: [...prev.questions, newQuestion] }));
   };
 
   const getDefaultQuestionData = (type) => {
@@ -124,10 +111,7 @@ const FormBuilder = () => {
           correctAnswers: { 'ans1': 'cat1', 'ans2': 'cat2' }
         };
       case QUESTION_TYPES.CLOZE:
-        return {
-          sentence: 'A quick _____ fox jumped over a _____',
-          blanks: ['brown', 'fence']
-        };
+        return { sentence: 'A quick _____ fox jumped over a _____', blanks: ['brown', 'fence'] };
       case QUESTION_TYPES.COMPREHENSION:
         return {
           passage: 'Type passage here...',
@@ -145,30 +129,20 @@ const FormBuilder = () => {
 
   const updateQuestion = (questionId, updates) => {
     setForm(prev => {
-      const updatedQuestions = prev.questions.map(q => {
-        if (q.id === questionId) {
-          return { ...q, ...updates };
-        }
-        return q;
-      });
+      const updatedQuestions = prev.questions.map(q => q.id === questionId ? { ...q, ...updates } : q);
       return { ...prev, questions: updatedQuestions };
     });
   };
 
   const deleteQuestion = (questionId) => {
-    setForm(prev => ({
-      ...prev,
-      questions: prev.questions.filter(q => q.id !== questionId)
-    }));
+    setForm(prev => ({ ...prev, questions: prev.questions.filter(q => q.id !== questionId) }));
   };
 
   const handleHeaderImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (e) => {
-        setForm(prev => ({ ...prev, headerImage: e.target.result }));
-      };
+      reader.onload = (e) => setForm(prev => ({ ...prev, headerImage: e.target.result }));
       reader.readAsDataURL(file);
     }
   };
@@ -206,7 +180,7 @@ const FormBuilder = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="w-8 h-8 bg-emerald-600 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">-</span>
+                <span className="text-white font-bold text-sm">?</span>
               </div>
               <h1 className="text-xl font-semibold text-gray-800">Questify</h1>
             </div>
@@ -216,15 +190,10 @@ const FormBuilder = () => {
                 onClick={() => setCurrentView(currentView === 'builder' ? 'preview' : 'builder')}
                 className="btn-secondary"
               >
-                <Eye size={16} />
-                {currentView === 'builder' ? 'Preview' : 'Edit'}
+                👁 {currentView === 'builder' ? 'Preview' : 'Edit'}
               </button>
-              <button
-                onClick={saveForm}
-                className="btn-primary"
-              >
-                <Save size={16} />
-                Save
+              <button onClick={saveForm} className="btn-primary">
+                💾 Save
               </button>
             </div>
           </div>
@@ -241,19 +210,19 @@ const FormBuilder = () => {
                   onClick={() => addQuestion(QUESTION_TYPES.CATEGORIZE)}
                   className="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 text-gray-600 transition-colors flex items-center gap-2"
                 >
-                  <Folders size={16} /> Categorize
+                  📂 Categorize
                 </button>
                 <button
                   onClick={() => addQuestion(QUESTION_TYPES.CLOZE)}
                   className="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 text-gray-600 transition-colors flex items-center gap-2"
                 >
-                  <SquarePen size={16} /> Cloze (Fill in blanks)
+                  ✏️ Cloze (Fill in blanks)
                 </button>
                 <button
                   onClick={() => addQuestion(QUESTION_TYPES.COMPREHENSION)}
                   className="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 text-gray-600 transition-colors flex items-center gap-2"
                 >
-                  <BookText size={16} /> Comprehension
+                  📖 Comprehension
                 </button>
               </div>
             </div>
@@ -268,7 +237,7 @@ const FormBuilder = () => {
                 />
 
                 <div className="p-6">
-                  {form.questions.map((question, index) => (
+                  {form.questions.map((question) => (
                     <QuestionCard
                       key={question.id}
                       question={question}
@@ -308,14 +277,16 @@ const FormBuilder = () => {
                     <h2 className="text-xl font-semibold mb-4 text-gray-800">
                       {index + 1}. {question.title}
                     </h2>
-
                     {renderQuestionPreview(question)}
                   </div>
                 ))}
 
                 {form.questions.length > 0 && (
                   <div className="text-center pt-8">
-                    <button onClick={submitFormResponse} className="px-8 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 font-medium transition-colors">
+                    <button
+                      onClick={submitFormResponse}
+                      className="px-8 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 font-medium transition-colors"
+                    >
                       Submit
                     </button>
                   </div>
@@ -325,7 +296,7 @@ const FormBuilder = () => {
           </div>
         )}
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
