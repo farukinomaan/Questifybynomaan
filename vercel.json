@@ -19,9 +19,5 @@
       "use": "@vercel/static"
     }
   ],
-  "installCommand": [
-    "npm install --prefix backend",
-    "npm install --prefix frontend"
-  ],
-  "buildCommand": "npm run build --prefix frontend"
+  "buildCommand": "npm run build"
 }
