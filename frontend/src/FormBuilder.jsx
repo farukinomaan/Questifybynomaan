@@ -192,10 +192,10 @@ const FormBuilder = () => {
                 onClick={() => setCurrentView(currentView === 'builder' ? 'preview' : 'builder')}
                 className="btn-secondary"
               >
-                👁 {currentView === 'builder' ? 'Preview' : 'Edit'}
+                 {currentView === 'builder' ? 'Preview' : 'Edit'}
               </button>
               <button onClick={saveForm} className="btn-primary">
-                💾 Save
+                Save
               </button>
             </div>
           </div>
@@ -212,19 +212,19 @@ const FormBuilder = () => {
                   onClick={() => addQuestion(QUESTION_TYPES.CATEGORIZE)}
                   className="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 text-gray-600 transition-colors flex items-center gap-2"
                 >
-                  📂 Categorize
+                  Categorize
                 </button>
                 <button
                   onClick={() => addQuestion(QUESTION_TYPES.CLOZE)}
                   className="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 text-gray-600 transition-colors flex items-center gap-2"
                 >
-                  ✏️ Cloze (Fill in blanks)
+                  Cloze (Fill in blanks)
                 </button>
                 <button
                   onClick={() => addQuestion(QUESTION_TYPES.COMPREHENSION)}
                   className="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 text-gray-600 transition-colors flex items-center gap-2"
                 >
-                  📖 Comprehension
+                  Comprehension
                 </button>
               </div>
             </div>
