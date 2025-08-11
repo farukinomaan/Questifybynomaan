@@ -1,9 +1,8 @@
 /**
  * @copyright Nomaan Faruki - 2025
  */
-
 import React from 'react';
-import { X } from 'lucide-react';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 
 const CategorizeBuilder = ({ question, updateQuestion }) => {
   const addCategory = () => {
@@ -63,7 +62,7 @@ const CategorizeBuilder = ({ question, updateQuestion }) => {
               className="input-field"
             />
             <button onClick={() => removeCategory(index)} className="btn-icon-danger">
-              <X size={16} />
+              <XMarkIcon className="w-4 h-4" />
             </button>
           </div>
         ))}
@@ -95,7 +94,7 @@ const CategorizeBuilder = ({ question, updateQuestion }) => {
               ))}
             </select>
             <button onClick={() => removeItem(index)} className="btn-icon-danger">
-              <X size={16} />
+              <XMarkIcon className="w-4 h-4" />
             </button>
           </div>
         ))}

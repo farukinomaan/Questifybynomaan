@@ -1,9 +1,8 @@
 /**
  * @copyright Nomaan Faruki - 2025
  */
-
 import React from 'react';
-import { Trash2 } from 'lucide-react';
+import { TrashIcon } from '@heroicons/react/24/outline';
 
 const ComprehensionBuilder = ({ question, updateQuestion }) => {
   const addMCQQuestion = () => {
@@ -50,7 +49,7 @@ const ComprehensionBuilder = ({ question, updateQuestion }) => {
             <div className="flex justify-between items-center mb-2">
               <h5 className="font-medium">Question {index + 1}</h5>
               <button onClick={() => removeMCQQuestion(mcq.id)} className="btn-icon-danger">
-                <Trash2 size={16} />
+                <TrashIcon className="w-4 h-4" />
               </button>
             </div>
             

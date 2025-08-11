@@ -1,9 +1,8 @@
 /**
  * @copyright Nomaan Faruki - 2025
  */
-
 import React from 'react';
-import { Upload } from 'lucide-react';
+import { ArrowUpTrayIcon } from '@heroicons/react/24/outline';
 
 const FormHeader = ({ form, setForm, fileInputRef, handleHeaderImageUpload }) => {
   return (
@@ -20,7 +19,7 @@ const FormHeader = ({ form, setForm, fileInputRef, handleHeaderImageUpload }) =>
           onClick={() => fileInputRef.current?.click()}
           className="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
         >
-          <Upload size={16} />
+          <ArrowUpTrayIcon className="w-4 h-4" />
           Header Image
         </button>
         <input

@@ -1,16 +1,15 @@
 /**
  * @copyright Nomaan Faruki - 2025
  */
-
 import React from 'react';
-import { Trash2, GripVertical } from 'lucide-react';
+import { TrashIcon, Bars3Icon } from '@heroicons/react/24/outline';
 
 const QuestionCard = ({ question, updateQuestion, deleteQuestion, children }) => {
   return (
     <div className="mb-8 card-border">
       <div className="flex items-center justify-between mb-4 text-gray-400">
         <div className="flex items-center gap-2">
-          <GripVertical className="text-gray-500" size={16} />
+          <Bars3Icon className="w-4 h-4 text-gray-500" />
           <input
             type="text"
             value={question.title}
@@ -27,7 +26,7 @@ const QuestionCard = ({ question, updateQuestion, deleteQuestion, children }) =>
             onClick={() => deleteQuestion(question.id)}
             className="btn-icon-danger"
           >
-            <Trash2 size={16} />
+            <TrashIcon className="w-4 h-4" />
           </button>
         </div>
       </div>
