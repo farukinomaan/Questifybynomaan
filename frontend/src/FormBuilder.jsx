@@ -3,7 +3,8 @@
  */
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Plus, Trash2, GripVertical, Upload, Eye, Save, Settings, ChevronDown, X, Folders, SquarePen, BookText } from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
+const { Plus, Trash2, GripVertical, Upload, Eye, Save, Settings, ChevronDown, X, Folders, SquarePen, BookText } = LucideIcons; 'lucide-react';
 import FormHeader from './components/FormHeader.jsx';
 import QuestionCard from './components/QuestionCard.jsx';
 import CategorizeBuilder from './components/builder/CategorizeBuilder.jsx';
