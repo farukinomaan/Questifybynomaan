@@ -16,10 +16,7 @@
     },
     {
       "src": "frontend/dist/**/*",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "frontend/dist"
-      }
+      "use": "@vercel/static"
     }
   ],
   "installCommand": "npm install --prefix backend && npm install --prefix frontend",
